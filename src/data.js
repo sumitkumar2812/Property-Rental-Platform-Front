@@ -1,0 +1,147 @@
+export const propertyData = [
+  {
+    "id": 1,
+    "title": "3 BHK Luxury Flat",
+    "price": 125000,
+    "location": "Mumbai",
+    "image": "https://images.pexels.com/photos/981916/pexels-photo-981916.jpeg",
+    "description": "Spacious luxury apartment with modern interiors and city skyline view.",
+    "category": "Luxury",
+    "bedrooms": 3,
+    "bathrooms": 3,
+    "size_sqft": 1850
+  },
+  {
+    "id": 2,
+    "title": "2 BHK Premium Apartment",
+    "price": 85000,
+    "location": "Delhi",
+    "image": "https://images.pexels.com/photos/2111768/pexels-photo-2111768.jpeg",
+    "description": "Premium apartment located in prime area with all modern amenities.",
+    "category": "Premium",
+    "bedrooms": 2,
+    "bathrooms": 2,
+    "size_sqft": 1200
+  },
+  {
+    "id": 3,
+    "title": "4 BHK Villa",
+    "price": 210000,
+    "location": "Bangalore",
+    "image": "https://images.pexels.com/photos/7189284/pexels-photo-7189284.jpeg",
+    "description": "Independent villa with private garden and parking space.",
+    "category": "Luxury",
+    "bedrooms": 4,
+    "bathrooms": 4,
+    "size_sqft": 3200
+  },
+  {
+    "id": 4,
+    "title": "3 BHK Sea View Apartment",
+    "price": 175000,
+    "location": "Chennai",
+    "image": "https://images.pexels.com/photos/3444542/pexels-photo-3444542.jpeg",
+    "description": "Sea facing apartment with balcony and modular kitchen.",
+    "category": "Luxury",
+    "bedrooms": 3,
+    "bathrooms": 3,
+    "size_sqft": 2000
+  },
+  {
+    "id": 5,
+    "title": "2 BHK Affordable Flat",
+    "price": 60000,
+    "location": "Hyderabad",
+    "image": "https://images.pexels.com/photos/6522114/pexels-photo-6522114.jpeg",
+    "description": "Affordable housing option in well-connected locality.",
+    "category": "Budget",
+    "bedrooms": 2,
+    "bathrooms": 2,
+    "size_sqft": 1050
+  },
+  {
+    "id": 6,
+    "title": "5 BHK Mansion",
+    "price": 350000,
+    "location": "Kolkata",
+    "image": "https://images.pexels.com/photos/29547315/pexels-photo-29547315.jpeg",
+    "description": "Large mansion with heritage design and spacious rooms.",
+    "category": "Luxury",
+    "bedrooms": 5,
+    "bathrooms": 5,
+    "size_sqft": 4500
+  },
+  {
+    "id": 7,
+    "title": "3 BHK Smart Home",
+    "price": 140000,
+    "location": "Pune",
+    "image": "https://images.pexels.com/photos/6776755/pexels-photo-6776755.jpeg",
+    "description": "Smart home enabled apartment with automation features.",
+    "category": "Premium",
+    "bedrooms": 3,
+    "bathrooms": 3,
+    "size_sqft": 1900
+  },
+  {
+    "id": 8,
+    "title": "4 BHK Duplex",
+    "price": 220000,
+    "location": "Ahmedabad",
+    "image": "https://images.pexels.com/photos/6522109/pexels-photo-6522109.jpeg",
+    "description": "Modern duplex house in a gated society.",
+    "category": "Luxury",
+    "bedrooms": 4,
+    "bathrooms": 4,
+    "size_sqft": 3100
+  },
+  {
+    "id": 9,
+    "title": "2 BHK City Apartment",
+    "price": 75000,
+    "location": "Jaipur",
+    "image": "https://images.pexels.com/photos/672630/pexels-photo-672630.jpeg",
+    "description": "Well-ventilated apartment near city center.",
+    "category": "Premium",
+    "bedrooms": 2,
+    "bathrooms": 2,
+    "size_sqft": 1150
+  },
+  {
+    "id": 10,
+    "title": "3 BHK Lake View Flat",
+    "price": 160000,
+    "location": "Bhopal",
+    "image": "https://images.pexels.com/photos/1684187/pexels-photo-1684187.jpeg",
+    "description": "Beautiful lake view apartment with modern interiors.",
+    "category": "Luxury",
+    "bedrooms": 3,
+    "bathrooms": 3,
+    "size_sqft": 2100
+  },
+  {
+    "id": 11,
+    "title": "2 BHK Compact Flat",
+    "price": 50000,
+    "location": "Lucknow",
+    "image": "https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg",
+    "description": "Compact and affordable flat ideal for small families.",
+    "category": "Budget",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "size_sqft": 900
+  },
+  {
+    "id": 12,
+    "title": "4 BHK Premium Villa",
+    "price": 280000,
+    "location": "Chandigarh",
+    "image": "https://images.pexels.com/photos/2014806/pexels-photo-2014806.jpeg",
+    "description": "Premium villa with landscaped garden and garage.",
+    "category": "Luxury",
+    "bedrooms": 4,
+    "bathrooms": 4,
+    "size_sqft": 3400
+  }
+  
+]

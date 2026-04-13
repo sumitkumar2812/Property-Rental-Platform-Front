@@ -1,0 +1,84 @@
+/* Auth Container: Form ko page ke beech mein lane ke liye */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  background-color: #f4f7f6;
+}
+
+/* Form Card: Safed rang ka box */
+.auth-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.auth-card h2 {
+  margin-bottom: 1.5rem;
+  color: #333;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Input Fields: Sundar aur bade boxes */
+.auth-card input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  box-sizing: border-box; /* Padding se width na badhe isliye */
+}
+
+.auth-card input:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+}
+
+/* Button: Blue color ka interactive button */
+.auth-card button {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.auth-card button:hover {
+  background-color: #0056b3;
+}
+
+/* Links: Login se Signup par jane ke liye */
+.auth-card p {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.auth-card a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.auth-card-role{
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  height: 50%;
+  text-align: center;
+  margin: 5px
+}

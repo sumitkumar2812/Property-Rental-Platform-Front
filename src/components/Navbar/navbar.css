@@ -1,0 +1,60 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-size: cover;
+  padding: 15px 5%;
+  background-color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  height: 10vh;
+}
+
+.nav-logo h2 {
+  font-size: 1.5rem;
+  color: #333;
+  cursor: pointer;
+}
+
+.nav-logo span {
+  color: #007bff; /* Professional Blue color */
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #555;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.nav-links a:hover {
+  color: #007bff;
+}
+
+.login-btn {
+  padding: 10px 22px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login-btn:hover {
+  background-color: #0056b3;
+}
+
+.login-signup {
+  padding: 5px;
+  margin-right: 10px;
+}
