@@ -1,27 +1,39 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
 import "./addProperty.css"
 import {useNavigate } from 'react-router-dom'
+import Loader from '../Loader/loader'
 
 const AddProperty = () => {
     const navigate = useNavigate()
+    const [loading , setLoading] = useState(true)
 
     const [formData, setFormData] = useState({
-        title: "", location: "", price: "", image: "", description: "", category: "House", bedrooms: "", bathrooms: ""
+        title: "", location: "", price: "", image: "", description: "", bedrooms: "", bathrooms: ""
     })
 
+    useEffect(() => {
+        const timer = setTimeout(() =>{
+            setLoading(false)
+        },500)
+        return () => clearTimeout(timer)
+    }, []);
+    
     const handleChange = (e) => {
         const {name, value} = e.target
         setFormData({
             ...formData,
             [name]: value
         })
+       
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
         const token = localStorage.getItem("token");
+
+        setLoading(true)
 
         try {
             const response = await axios.post("http://localhost:5000/api/properties", formData, { headers: {Authorization :`Bearer ${token}`}})
@@ -37,6 +49,8 @@ const AddProperty = () => {
 
     }
 
+    if (loading) return <Loader/>
+
     return (
         <div className='add-property-container'>
             <h2>List Your Property</h2>
@@ -50,7 +64,6 @@ const AddProperty = () => {
                 <input type='text' name='bathrooms' placeholder='No. of Bathrooms' onChange={handleChange} required />
                 <button type='submit' className='submit-btn'>Post Property</button>
             </form>
-
         </div>
     )
 }

@@ -2,7 +2,7 @@ import { useNavigate, Link } from 'react-router-dom'
 
 import "./navbar.css"
 
-const navbar = () => {
+const Navbar = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const role = localStorage.getItem("role");
@@ -35,4 +35,4 @@ const navbar = () => {
   )
 }
 
-export default navbar
+export default Navbar

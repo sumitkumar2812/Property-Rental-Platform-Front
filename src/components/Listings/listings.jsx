@@ -50,11 +50,11 @@ const Listings = () => {
       <div className='listings-container'>
         {filteredData.length > 0 ? (filteredData.map((item) => (
           <div className='property-card' key={item._id}>
-            <img src={item.image} alt="item.title" loading='lazy' />
+            <img src={item.image} alt={item.title} loading='lazy' />
             <div className='card-details'>
               <h3>{item.title}</h3>
               <p className='loc'>{item.location}</p>
-              <p className='price'>{item.price} <span>/Month</span></p>
+              <p className='price'>₹{item.price} <span>/Month</span></p>
               <Link to={`/property/${item._id}`}>
                 <button className='details-btn'>View Details</button>
               </Link>

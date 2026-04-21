@@ -1,14 +1,57 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { propertyData } from '../../data'
+import axios from 'axios'
+import Loader from "../Loader/loader"
 import "./details.css"
 
-const details = ({data}) => {
+const Details = () => {
+  const { id } = useParams();
+  const Navigate = useNavigate();
+  const [property, setProperty] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const user = JSON.parse(localStorage.getItem("user"))
+  const loggedInUserId = user?._id;
+  const propertyOwnerId = property?._id;
 
-  const { id } = useParams()
-  const Navigate = useNavigate()
+  console.log(loggedInUserId)
+  console.log(propertyOwnerId)
 
-  const property = data.find((item) => item.id === Number(id));
+  useEffect(() => {
+    const fetchProperty = async () => {
+      try {
+
+        const response = await axios.get(`http://localhost:5000/api/properties/${id}`)
+        console.log(response.data);
+        setProperty(response.data);
+      } catch (error) {
+        console.error(error)
+      } finally {
+        setLoading(false)
+      }
+
+    }; fetchProperty();
+  }, [id]);
+
+  const handleDelete = async () => {
+    const token = localStorage.getItem("token")
+    const isConfirmed = window.confirm("Are you sure you want to delete this proprty , this action can not be Undone.")
+    if (isConfirmed) {
+      try {
+        await axios.delete(`http://localhost:5000/api/properties/${id}`, {
+          headers: { Authorization: `Bearer ${token}` }
+        })
+        alert("Property Deleted Successfully.")
+        Navigate("/listings")
+      } catch (error) {
+        console.error(error)
+        alert("Failed to Delete Property.")
+      } finally {
+        setLoading(false)
+      }
+    }
+  }
+  if (loading) return
+  <Loader />
 
   if (!property) {
     return (
@@ -18,6 +61,10 @@ const details = ({data}) => {
       </div>
     )
   }
+
+  // const [formData, setFormData] = useState({
+  // title: "", location: "", price: "", image: "", description: "", bedrooms: "", bathrooms: ""
+  // })
 
   return (
     <div className='details-wrapper'>
@@ -34,7 +81,7 @@ const details = ({data}) => {
           <p>{property.location}</p>
 
           <div className='price-section'>
-            <span className='amt'>{property.price}</span>
+            <span className='amt'>₹{property.price}</span>
             <span className='per-month'>/Month</span>
           </div>
 
@@ -46,11 +93,15 @@ const details = ({data}) => {
           <div className='features-list'>
             <div>{property.bathrooms} Bathrooms</div>
             <div>{property.bedrooms} Bedrooms</div>
-            <div>{property.size_sqft}<span> sqft</span></div>
           </div>
 
-          <button className='book-now-btn' onClick={() => alert("Contact Owner On this Number - 1234567890")}>Contact Owner</button>
-          <button className='book-now-btn'>Delete Property</button>
+          <div className='action-buttons'>
+            {loggedInUserId === propertyOwnerId ? <div><button className='book-now-btn' onClick={handleDelete}>Delete Property</button>
+              <button className='book-now-btn' onClick={() => Navigate(`/edit-property/${property._id}`)}>Update Property</button>
+            </div> : (<button className='book-now-btn' onClick={() => alert("Contact Owner On this Number - 1234567890")}>Contact Owner</button>)}
+
+
+          </div>
         </div>
       </div>
 
@@ -58,4 +109,4 @@ const details = ({data}) => {
   )
 }
 
-export default details
+export default Details

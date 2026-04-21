@@ -3,7 +3,7 @@ import axios from "axios"
 import { useNavigate } from "react-router-dom"
 import "./login.css"
 
-const login = () => {
+const Login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
@@ -41,4 +41,4 @@ const login = () => {
   )
 }
 
-export default login
+export default Login

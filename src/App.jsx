@@ -8,6 +8,7 @@ import AddProperty from "./components/AddProperty/addProperty.jsx"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import ProtectedRoute from "./components/protectedRoute.jsx"
 import './App.css'
+import EditProperty from "./components/EditProperty/editProperty.jsx"
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
         <Route path="/login" element={<Login/>}/>
         <Route path="/listings" element={<Listings />} />
         <Route path="/add" element={<ProtectedRoute><AddProperty /></ProtectedRoute>} />
+        <Route path="/edit-property/:id" element={<ProtectedRoute><EditProperty /></ProtectedRoute>} />
         <Route path="/property/:id" element={<Details />} />
       </Routes>
     </BrowserRouter>

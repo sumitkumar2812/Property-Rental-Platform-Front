@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import "./home.css"
 import { useNavigate } from 'react-router-dom'
 
-const home = () => {
+const Home = () => {
 
 const [searchTerm, setSearchTerm] = useState("");
 const navigate = useNavigate();
@@ -38,4 +38,4 @@ return (
 )
 }
 
-export default home
+export default Home
