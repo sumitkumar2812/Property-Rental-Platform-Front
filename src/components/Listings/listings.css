@@ -71,3 +71,12 @@
   border-radius: 5px;
   cursor: pointer;
 }
+.search-input{
+  height: 42px;
+  width: 25px;
+  border-radius: 20px;
+  border-color: #007bff;
+  padding-left: 5px;
+  margin-left: 15px;
+  border-width: 2px;
+}

@@ -9,12 +9,16 @@ const Details = () => {
   const Navigate = useNavigate();
   const [property, setProperty] = useState(null);
   const [loading, setLoading] = useState(true);
-  const user = JSON.parse(localStorage.getItem("user"))
-  const loggedInUserId = user?._id;
-  const propertyOwnerId = property?._id;
+  const user = JSON.parse(localStorage.getItem("user"));
+  console.log(user)
+  console.log(property)
+  const loggedInUserId = user?.id;
+  const propertyOwnerId = property?.host;
+
 
   console.log(loggedInUserId)
   console.log(propertyOwnerId)
+  console.log(loggedInUserId === propertyOwnerId)
 
   useEffect(() => {
     const fetchProperty = async () => {
@@ -99,7 +103,6 @@ const Details = () => {
             {loggedInUserId === propertyOwnerId ? <div><button className='book-now-btn' onClick={handleDelete}>Delete Property</button>
               <button className='book-now-btn' onClick={() => Navigate(`/edit-property/${property._id}`)}>Update Property</button>
             </div> : (<button className='book-now-btn' onClick={() => alert("Contact Owner On this Number - 1234567890")}>Contact Owner</button>)}
-
 
           </div>
         </div>

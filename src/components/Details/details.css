@@ -70,11 +70,12 @@
   background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 15px;
   font-size: 1.1rem;
   font-weight: bold;
   cursor: pointer;
   margin-top: auto;
+  margin-left: 10px;
 }
 
 .error-page{
@@ -87,5 +88,7 @@
 .action-buttons{
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  gap: 10px; /* Dono buttons ke beech 15px ka gap */
+  align-items: center;
+  margin: 10px;
 }

@@ -17,6 +17,7 @@ const Login = () => {
 
         localStorage.setItem("token", response.data.token)
         localStorage.setItem("role", response.data.role)
+        localStorage.setItem("user", JSON.stringify(response.data.user))
 
         alert("User Login Successfully")
         navigate("/")

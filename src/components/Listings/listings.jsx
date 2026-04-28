@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import Loader from '../Loader/loader'
 import axios from 'axios'
 import "./listings.css"
@@ -8,12 +8,25 @@ import { Link } from "react-router-dom"
 const Listings = () => {
   const [properties, setProperties] = useState([])
   const [loading, setLoading] = useState(true)
-  const [searchTerm, setSearchTerm] = useState("")
+  const [filters, setFilters] = useState({
+    city: "",
+    maxPrice: "",
+    minPrice: "",
+    bedrooms: ""
+  });
+
+
+  const handleFilterChange = (e) => {
+    setFilters({ ...filters, [e.target.name]: e.target.value })
+  }
+
 
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/properties");
+        setLoading(true)
+        const {city, maxPrice, minPrice, bedrooms} = filters
+        const response = await axios.get("http://localhost:5000/api/properties",{params:{city, maxPrice, minPrice, bedrooms}});
         setProperties(response.data)
         console.log(response.data)
       } catch (error) {
@@ -22,33 +35,42 @@ const Listings = () => {
         setLoading(false)
       }
     }
-    fetchProperties()
-  }, [])
-
-  const filteredData = useMemo(() => {
-    return properties.filter((item) => item.location?.toLowerCase().includes(searchTerm.toLowerCase())
-    )
-  }, [searchTerm, properties]);
-
-  if (loading) {
-    return <Loader/>
-  }
+    const timer = setTimeout(() => fetchProperties(),500);
+    return () => clearTimeout(timer)
+  }, [filters])
 
   return (
-
     <div className='listings-page'>
       <div className='searchSection'>
-        <input type='text' placeholder='Enter Your City' className='search-input' style={{
+        <input name='city' type='text' placeholder='Enter Your City' style={{
           padding: '12px 20px',
-          width: '60%',
+          width: '25%',
           borderRadius: '25px',
           border: '2px solid #007bff',
           outline: 'none'
-        }} onChange={(e) => setSearchTerm(e.target.value)} />
-        <p style={{ marginTop: '10px', color: '#666' }}>Showing {filteredData.length} properties</p>
+        }} onChange={handleFilterChange} />
+
+        <input name='minPrice' type='text' placeholder='Minimun Price' style={{
+          padding: '12px 20px',
+          width: '25%',
+          borderRadius: '25px',
+          border: '2px solid #007bff',
+          marginLeft:"15px",
+          outline: 'none'
+        }} onChange={handleFilterChange} />
+
+        <select name="bedrooms" className='search-input' style={{ width: '150px' }} onChange={handleFilterChange}>
+          <option value="">All BHK</option>
+          <option value="1">1 BHK</option>
+          <option value="2">2 BHK</option>
+          <option value="3">3 BHK</option>
+        </select>
+
+        <p style={{ marginTop: '10px', color: '#666' }}>Showing {properties.length} properties</p>
       </div>
-      <div className='listings-container'>
-        {filteredData.length > 0 ? (filteredData.map((item) => (
+
+      {loading ? <Loader /> : (<div className='listings-container'>
+        {properties.length > 0 ? (properties.map((item) => (
           <div className='property-card' key={item._id}>
             <img src={item.image} alt={item.title} loading='lazy' />
             <div className='card-details'>
@@ -61,7 +83,7 @@ const Listings = () => {
             </div>
           </div>))
         ) : (<div>There is no properties in this Location</div>)}
-      </div>
+      </div>)}
     </div>
   )
 }
