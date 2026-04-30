@@ -51,7 +51,26 @@ const AddProperty = () => {
         const token = localStorage.getItem("token");
         setLoading(true)
         try {
-            const response = await axios.post("http://localhost:5000/api/properties", formData, { headers: { Authorization: `Bearer ${token}` } })
+
+            const data = new FormData();
+
+            data.append("title", formData.title);
+            data.append("location", formData.location);
+            data.append("price", formData.price);
+            data.append("description", formData.description);
+            data.append("bedrooms", formData.bedrooms);
+            data.append("bathrooms", formData.bathrooms);
+
+            if (imageFile) {
+                data.append("image", imageFile)
+            }
+
+            const response = await axios.post("http://localhost:5000/api/properties", data, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "multipart/form-data"
+                }
+            })
             if (response.status === 201) {
                 alert("Property Posted Successfully")
                 navigate("/listings")
@@ -77,10 +96,10 @@ const AddProperty = () => {
                         <button
                             onClick={handleRemoveImage}
                             style={{
-                                marginLeft:"5px",
-                                marginBottom:"5px",
+                                marginLeft: "5px",
+                                marginBottom: "5px",
                                 color: 'black',
-                                borderWidth:'2px',
+                                borderWidth: '2px',
                                 borderRadius: '10px',
                                 cursor: 'pointer',
                                 padding: '5px 10px'
@@ -89,7 +108,7 @@ const AddProperty = () => {
                             X
                         </button>
                     </div>)}
-                <input type='file' accept='image' placeholder='Image' onChange={handleImageChange} required />
+                <input type='file' accept='image/*' placeholder='Image' onChange={handleImageChange} required />
                 <textarea name='description' placeholder='Description' onChange={handleChange} required></textarea>
                 <input type='text' name='bedrooms' placeholder='No. of Bedrooms' onChange={handleChange} required />
                 <input type='text' name='bathrooms' placeholder='No. of Bathrooms' onChange={handleChange} required />
