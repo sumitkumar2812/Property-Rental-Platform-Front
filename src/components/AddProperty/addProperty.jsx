@@ -10,7 +10,7 @@ const AddProperty = () => {
     const [imageFile, setImageFile] = useState(null);
     const [loading, setLoading] = useState(true)
     const [formData, setFormData] = useState({
-        title: "", location: "", price: "", image: "", description: "", bedrooms: "", bathrooms: ""
+        title: "", location: "", price: "", description: "", bedrooms: "", bathrooms: ""
     })
 
     useEffect(() => {
@@ -36,6 +36,7 @@ const AddProperty = () => {
     const handleRemoveImage = () => {
         setImageFile(null);
         setImagePreview(null);
+        document.getElementById("inputImage").value = "";
     }
 
     const handleChange = (e) => {
@@ -108,7 +109,7 @@ const AddProperty = () => {
                             X
                         </button>
                     </div>)}
-                <input type='file' accept='image/*' placeholder='Image' onChange={handleImageChange} required />
+                <input type='file' id="inputImage" accept='image/*' placeholder='Image' onChange={handleImageChange} required />
                 <textarea name='description' placeholder='Description' onChange={handleChange} required></textarea>
                 <input type='text' name='bedrooms' placeholder='No. of Bedrooms' onChange={handleChange} required />
                 <input type='text' name='bathrooms' placeholder='No. of Bathrooms' onChange={handleChange} required />
