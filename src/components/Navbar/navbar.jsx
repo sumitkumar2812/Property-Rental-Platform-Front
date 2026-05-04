@@ -23,6 +23,7 @@ const Navbar = () => {
         <li><Link to="/">Home</Link></li>
         <li><Link to="/listings">Browse Homes</Link></li>
         {token && role === "owner" && (<li><Link to="/add">List Your Property</Link></li>)}
+        {token && role === "owner" && (<li><Link to="/my-properties">My Properties</Link></li>)}
       </ul>
       {token ? (<button  className='login-btn' onClick={handleLogout}>Logout</button>) : (
         <div className='login-signup'>
