@@ -9,6 +9,7 @@ const Details = () => {
   const Navigate = useNavigate();
   const [property, setProperty] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false); 
   const user = JSON.parse(localStorage.getItem("user"));
   console.log(user)
   console.log(property)
@@ -102,7 +103,7 @@ const Details = () => {
           <div className='action-buttons'>
             {loggedInUserId === propertyOwnerId ? <div><button className='book-now-btn' onClick={handleDelete}>Delete Property</button>
               <button className='book-now-btn' onClick={() => Navigate(`/edit-property/${property._id}`)}>Update Property</button>
-            </div> : (<button className='book-now-btn' onClick={() => alert("Contact Owner On this Number - 1234567890")}>Contact Owner</button>)}
+            </div> : (<button className='book-now-btn' onClick={() => setShowModal(true)}>Contact Owner</button>)}
 
           </div>
         </div>

@@ -6,8 +6,9 @@ import "./signup.css"
 const Signup = () => {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
+  const [mobile, setMobile] = useState("")
   const [password, setPassword] = useState("")
-  const [role, setRole] = useState("user")
+  const [role, setRole] = useState("tenant")
 
   const navigate = useNavigate()
 
@@ -15,7 +16,7 @@ const Signup = () => {
     e.preventDefault()
 
     try {
-      const response = await axios.post("http://localhost:5000/api/auth/signup", { name: name, email: email, password: password, role: role });
+      const response = await axios.post("http://localhost:5000/api/auth/signup", { name: name, email: email, mobile: mobile, password: password, role: role });
       alert("User Registered! Please Login")
       navigate("/login")
       console.log(response.data)
@@ -32,10 +33,11 @@ const Signup = () => {
         <form onSubmit={handleSignup}>
           <input type="text" placeholder="Name" onChange={(e) => setName(e.target.value)} required />
           <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} required />
+          <input type="mobile" placeholder="Mobile Number" onChange={(e) => setMobile(e.target.value)} required />
           <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} required />
           <div >
             <select value={role} onChange={(e) => setRole(e.target.value)} className="auth-card-role">
-              <option value="user">I want to Rent (Tenent)</option>
+              <option value="tenant">I want to Rent (Tenent)</option>
               <option value="owner">I want to List Property (Owner)</option>
             </select>
           </div>
