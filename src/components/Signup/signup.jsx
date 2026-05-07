@@ -35,7 +35,7 @@ const Signup = () => {
           <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} required />
           <input type="mobile" placeholder="Mobile Number" onChange={(e) => setMobile(e.target.value)} required />
           <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} required />
-          <div >
+          <div>
             <select value={role} onChange={(e) => setRole(e.target.value)} className="auth-card-role">
               <option value="tenant">I want to Rent (Tenent)</option>
               <option value="owner">I want to List Property (Owner)</option>

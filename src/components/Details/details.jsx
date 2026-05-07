@@ -9,12 +9,12 @@ const Details = () => {
   const Navigate = useNavigate();
   const [property, setProperty] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [showModal, setShowModal] = useState(false); 
+  const [showModal, setShowModal] = useState(false);
   const user = JSON.parse(localStorage.getItem("user"));
-  console.log(user)
-  console.log(property)
+  console.log(user);
+  console.log(property?.host?.name);
   const loggedInUserId = user?.id;
-  const propertyOwnerId = property?.host;
+  const propertyOwnerId = property?.host?._id;
 
 
   console.log(loggedInUserId)
@@ -105,9 +105,26 @@ const Details = () => {
               <button className='book-now-btn' onClick={() => Navigate(`/edit-property/${property._id}`)}>Update Property</button>
             </div> : (<button className='book-now-btn' onClick={() => setShowModal(true)}>Contact Owner</button>)}
 
+            {showModal && (<div className='modal-overlay'>
+              <div className='modal-content'>
+                <h3>Owner's Contact details</h3>
+                <hr />
+                <p><strong>Name:</strong> {property.host?.name}</p>
+                
+                <p><strong>Email:</strong> {property.host?.email}</p>
+                <p><strong>Mobile:</strong> {property.host?.mobile}</p>
+
+                <button className="close-btn" onClick={() => setShowModal(false)}>
+                  Close
+                </button>
+              </div>
+
+
+            </div>)}
           </div>
         </div>
       </div>
+
 
     </div>
   )
