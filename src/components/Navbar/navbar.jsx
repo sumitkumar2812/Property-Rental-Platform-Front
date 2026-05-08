@@ -5,6 +5,8 @@ import "./navbar.css"
 const Navbar = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
+  const isAuthenticated = token && token !== "undefined" && token !== "null"
+  console.log(isAuthenticated);
   const role = localStorage.getItem("role");
 
   const handleLogout = () => {
@@ -28,6 +30,7 @@ const Navbar = () => {
       {token ? (<button  className='login-btn' onClick={handleLogout}>Logout</button>) : (
         <div className='login-signup'>
           <Link to="/signup" className='login-btn'>SignUp</Link>
+          <Link to="/login" className='login-btn'>Login</Link>
         </div>
       ) }
 
