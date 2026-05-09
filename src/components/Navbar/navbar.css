@@ -2,30 +2,30 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-size: cover;
-  padding: 15px 5%;
-  background-color: #ffffff;
+  padding: 15px 8%;
+  background: white;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
   z-index: 1000;
-  height: 10vh;
+  font-family: 'Poppins', sans-serif;
 }
 
-.nav-logo h2 {
+.nav-logo h1 {
+  cursor: pointer;
   font-size: 1.5rem;
   color: #333;
-  cursor: pointer;
 }
 
 .nav-logo span {
-  color: #007bff; /* Professional Blue color */
+  color: #00d2ff; /* Theme Color */
 }
 
 .nav-links {
   display: flex;
   list-style: none;
   gap: 30px;
+  align-items: center;
 }
 
 .nav-links a {
@@ -36,26 +36,75 @@
 }
 
 .nav-links a:hover {
-  color: #007bff;
+  color: #00d2ff;
 }
 
-.login-btn {
-  padding: 10px 22px;
-  background-color: #007bff;
-  color: white;
+/* Buttons Styling */
+.logout-btn, .signup-btn {
+  padding: 10px 25px;
+  border-radius: 50px;
   border: none;
-  border-radius: 6px;
-  font-weight: 600;
   cursor: pointer;
+  font-weight: bold;
   transition: 0.3s;
-  margin-left:5px ;
 }
 
-.login-btn:hover {
-  background-color: #0056b3;
+.logout-btn {
+  background: #ff4757;
+  color: white;
 }
 
-.login-signup {
-  padding: 5px;
-  margin-right: 10px;
+.signup-btn {
+  background: #00d2ff;
+  color: white;
+  text-decoration: none;
+}
+
+.signup-btn:hover {
+  background: #0099cc;
+  transform: scale(1.05);
+}
+
+.nav-auth-link {
+  text-decoration: none;
+  color: #00d2ff;
+  font-weight: bold;
+  margin-right: 20px;
+}
+
+.mobile-menu-icon {
+  display: none;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.mobile-auth-btns { display: none; }
+
+/* Responsive Media Queries */
+@media (max-width: 968px) {
+  .nav-links { display: none; }
+  .nav-auth-desktop { display: none; }
+  .mobile-menu-icon { display: block; }
+
+  .nav-links-mobile {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    left: 0; top: 70px;
+    width: 100%;
+    padding: 20px;
+    list-style: none;
+    box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+    gap: 20px;
+    text-align: center;
+  }
+
+  .mobile-auth-btns {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+  }
 }

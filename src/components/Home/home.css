@@ -1,59 +1,240 @@
+/* General Reset */
 .home-container {
-  width: 100%;
+  font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
 }
 
+/* Hero Section */
 .hero {
-  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
-              url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&q=80');
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
-  width: 100vw;
+  position: relative;
+  height: 85vh;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  text-align: center;
+  /* Ek achhi Real Estate image ka URL */
+  background: url('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
   color: white;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Image ko thoda dark karne ke liye taaki text dikhe */
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  padding: 20px;
 }
 
 .hero-content h1 {
-  font-size: 3rem;
-  margin-bottom: 10px;
+  font-size: 3.5rem;
+  margin-bottom: 15px;
+  font-weight: 700;
 }
 
+.hero-content h1 span {
+  color: #00d2ff; /* Highlight color */
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  opacity: 0.9;
+}
+
+/* Search Bar */
 .search-wrapper {
-  margin-top: 30px;
+  background: white;
+  padding: 10px;
+  border-radius: 50px;
   display: flex;
-  gap: 10px;
-  justify-content: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
 
 .search-wrapper input {
-  padding: 15px;
-  width: 350px;
-  border-radius: 5px;
+  flex: 1;
   border: none;
+  padding: 15px 25px;
   font-size: 1rem;
+  outline: none;
+  border-radius: 50px;
 }
 
-.search-wrapper button {
-  padding: 15px 30px;
-  background-color: #007bff;
+.search-button {
+  background: #00d2ff;
   color: white;
   border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  padding: 15px 40px;
+  border-radius: 50px;
   font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
+.search-button:hover {
+  background: #0099cc;
+  transform: scale(1.05);
+}
+
+/* Features Section */
 .features {
   display: flex;
-  justify-content: space-around;
-  padding: 50px 10%;
-  background-color: #f9f9f9;
+  justify-content: center;
+  gap: 30px;
+  padding: 80px 20px;
+  background: #f9f9f9;
+  flex-wrap: wrap;
 }
 
 .feature-card {
-  font-size: 1.2rem;
-  font-weight: bold;
+  background: white;
+  padding: 40px;
+  width: 280px;
+  text-align: center;
+  border-radius: 15px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+  transition: 0.3s;
+}
+
+.feature-card:hover {
+  transform: translateY(-10px);
+}
+
+.feature-card .icon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+.feature-card h3 {
+  margin-bottom: 10px;
   color: #333;
+}
+
+.feature-card p {
+  color: #777;
+  font-size: 0.9rem;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .hero-content h1 { font-size: 2.2rem; }
+  .search-wrapper { flex-direction: column; border-radius: 15px; }
+  .search-button { margin-top: 10px; border-radius: 10px; }
+  .features { flex-direction: column; align-items: center; }
+}
+/* Footer Styling */
+.footer {
+  background: #222;
+  color: white;
+  padding: 60px 20px 20px;
+  margin-top: 50px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 40px;
+}
+
+.footer-section {
+  flex: 1;
+  min-width: 250px;
+}
+
+.footer-section h3 span {
+  color: #00d2ff;
+}
+
+.footer-section h4 {
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+  border-bottom: 2px solid #00d2ff;
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+.footer-section p {
+  line-height: 1.6;
+  opacity: 0.8;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+  opacity: 0.8;
+}
+
+.footer-section ul li:hover {
+  color: #00d2ff;
+  padding-left: 5px;
+}
+
+/* Social Buttons */
+.social-links {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.social-icon {
+  text-decoration: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.linkedin {
+  background: #0077b5;
+  color: white;
+}
+
+.github {
+  background: #333;
+  color: white;
+  border: 1px solid #555;
+}
+
+.social-icon:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 50px;
+  padding-top: 20px;
+  border-top: 1px solid #444;
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
+
+/* Mobile Responsive Footer */
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  .footer-section h4 {
+    margin-top: 20px;
+  }
+  .social-links {
+    justify-content: center;
+  }
 }
