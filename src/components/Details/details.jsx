@@ -11,10 +11,14 @@ const Details = () => {
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const user = JSON.parse(localStorage.getItem("user"));
+  const token = localStorage.getItem("token");
   console.log(user);
   console.log(property?.host?.name);
   const loggedInUserId = user?.id;
   const propertyOwnerId = property?.host?._id;
+
+  const isOwner = token && user && loggedInUserId === propertyOwnerId;
+  console.log(isOwner);
 
 
   console.log(loggedInUserId)
@@ -101,9 +105,10 @@ const Details = () => {
           </div>
 
           <div className='action-buttons'>
-            {loggedInUserId === propertyOwnerId ? <div><button className='book-now-btn' onClick={handleDelete}>Delete Property</button>
+          {isOwner ? (<div><button className='book-now-btn' onClick={handleDelete}>Delete Property</button>
               <button className='book-now-btn' onClick={() => Navigate(`/edit-property/${property._id}`)}>Update Property</button>
-            </div> : (<button className='book-now-btn' onClick={() => setShowModal(true)}>Contact Owner</button>)}
+            </div>) : (<button className='book-now-btn' onClick={() => setShowModal(true)}>Contact Owner</button>)}
+             
 
             {showModal && (<div className='modal-overlay'>
               <div className='modal-content'>

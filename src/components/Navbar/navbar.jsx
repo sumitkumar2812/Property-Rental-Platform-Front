@@ -8,13 +8,18 @@ const Navbar = () => {
   const isAuthenticated = token && token !== "undefined" && token !== "null"
   console.log(isAuthenticated);
   const role = localStorage.getItem("role");
-
+  const user = localStorage.getItem("user");
+ 
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
+    localStorage.removeItem("user");
     alert("Logout Successfully")
+    window.location.href("/login")
     navigate("/login")
   }
+  console.log(user)
+  console.log(token)
 
   return (
     <nav className='navbar'>
