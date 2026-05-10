@@ -1,6 +1,8 @@
 .listings-page {
   padding: 40px 5%;
   background-color: #f9f9f9;
+ 
+  
 }
 
 .listings-container {
@@ -10,17 +12,22 @@
   justify-content: center;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 25px;
+  display: grid;
   margin-top: 30px;
+  padding: 40px 8%;
 }
 
 .property-card {
   background: white;
-  border-radius: 12px;
+  border-radius: 15px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   transition: transform 0.3s ease;
   height: 350px;
   width: 300px;
   margin: 5px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: 0.3s;
 }
 
 .property-card:hover {
@@ -29,7 +36,7 @@
 
 .property-card img {
   width: 100%;
-  height: 140px;
+  height: 150px;
   object-fit: cover;
   border-radius: 12px;
 }
