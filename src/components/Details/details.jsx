@@ -59,8 +59,7 @@ const Details = () => {
       }
     }
   }
-  if (loading) return
-  <Loader />
+  if (loading) return <Loader />
 
   if (!property) {
     return (

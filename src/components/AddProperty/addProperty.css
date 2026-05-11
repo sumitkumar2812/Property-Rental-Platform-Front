@@ -1,77 +1,82 @@
-/* 1. Poore page ka background aur alignment */
+/* Add/Edit Property Container */
 .add-property-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 40px 20px;
-  background-color: #f4f7f6; /* Halka sa professional greyish background */
-  min-height: 80vh;
+  max-width: 600px;
+  margin: 40px auto;
+  background: white;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
 .add-property-container h2 {
-  margin-bottom: 25px;
+  text-align: center;
+  margin-bottom: 30px;
   color: #333;
-  font-size: 2rem;
-  font-family: 'Poppins', sans-serif;
 }
 
-/* 2. Form ka dabba (The Card) */
+/* Form Layout */
 .property-form {
-  background: white;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1); /* Sunder si shadow */
-  width: 100%;
-  max-width: 500px; /* Form bahut zyada failna nahi chahiye */
   display: flex;
   flex-direction: column;
-  gap: 15px; /* Inputs ke beech barabar jagah */
+  gap: 15px;
 }
 
-/* 3. Inputs aur Textarea ki styling */
 .property-form input, 
 .property-form textarea {
   padding: 12px 15px;
-  border: 1px solid #ddd;
+  border: 1px solid #eee;
   border-radius: 8px;
   font-size: 1rem;
   outline: none;
-  transition: border-color 0.3s ease;
+  background: #fafafa;
+  transition: 0.3s;
 }
 
-/* Focus hone par blue border */
 .property-form input:focus, 
 .property-form textarea:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0,123,255,0.2);
+  background: white;
+  border-color: #00d2ff;
+  box-shadow: 0 0 0 3px rgba(0, 210, 255, 0.1);
 }
 
 .property-form textarea {
-  height: 120px;
-  resize: vertical; /* User height badha sake par width nahi */
+  min-height: 100px;
+  resize: vertical;
 }
 
-/* 4. Submit Button (The Action) */
-.submit-btn {
+/* Image Preview Section */
+.preview-container {
+  background: #f9f9f9;
   padding: 15px;
-  background-color: #28a745; /* Success Green color */
+  border-radius: 10px;
+  text-align: center;
+  border: 1px dashed #ccc;
+}
+
+/* Submit Button */
+.submit-btn {
+  background: #00d2ff;
   color: white;
+  padding: 15px;
   border: none;
   border-radius: 8px;
   font-size: 1.1rem;
   font-weight: bold;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: 0.3s;
+  margin-top: 10px;
 }
 
 .submit-btn:hover {
-  background-color: #218838;
+  background: #0077b5;
+  box-shadow: 0 5px 15px rgba(0, 210, 255, 0.3);
 }
 
-/* Mobile responsive fix */
-@media (max-width: 480px) {
-  .property-form {
-    padding: 20px;
+/* Property Form Mobile Responsive */
+@media (max-width: 650px) {
+  .add-property-container {
+    width: 90%;
+    padding: 25px;
+    margin: 20px auto;
   }
 }
