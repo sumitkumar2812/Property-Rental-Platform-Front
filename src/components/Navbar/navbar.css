@@ -80,11 +80,40 @@
 
 .mobile-auth-btns { display: none; }
 
+.nav-auth-desktop {
+  display: flex;
+  align-items: center;
+  background: rgba(0, 210, 255, 0.05);
+  padding: 5px 15px;
+  border-radius: 50px;
+  border: 1px solid rgba(0, 210, 255, 0.2);
+}
+
+.nav-profile-img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #00d2ff;
+  margin-right: 7px;
+
+}
+
+.nav-username {
+  font-weight: 600;
+  color: #333;
+  font-size: 0.9rem;
+  margin-right: 7px;
+  margin-top: 7px;
+}
+
+
 /* Responsive Media Queries */
-@media (max-width: 968px) {
+@media (max-width: 786px) {
   .nav-links { display: none; }
   .nav-auth-desktop { display: none; }
   .mobile-menu-icon { display: block; }
+
 
   .nav-links-mobile {
     position: absolute;
@@ -99,6 +128,9 @@
     gap: 20px;
     text-align: center;
   }
+  .nav-username {
+    display: none; /* Mobile par sirf photo dikhao, naam nahi (jagah bachane ke liye) */
+  }
 
   .mobile-auth-btns {
     display: flex;
@@ -108,3 +140,8 @@
     padding-top: 15px;
   }
 }
+.user-profile-flex{
+  display: flex;
+  justify-content: center;
+}
+

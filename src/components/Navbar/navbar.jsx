@@ -1,26 +1,31 @@
 import { useNavigate, Link } from 'react-router-dom';
-import { useState } from 'react'; // Mobile menu ke liye
+import { useState } from 'react';
 import "./navbar.css";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const [isMobile, setIsMobile] = useState(false); // Mobile toggle state
+  const [isMobile, setIsMobile] = useState(false);
 
   const token = localStorage.getItem("token");
-  const isAuthenticated = token && token !== "undefined" && token !== "null";
+  const user = JSON.parse(localStorage.getItem("user"));
   const role = localStorage.getItem("role");
+  
+  // Clean Authentication Check
+  const isAuthenticated = token && token !== "undefined" && token !== "null" && user;
 
   const handleLogout = () => {
-    localStorage.clear(); // Saara data ek baar mein saaf
+    localStorage.clear();
     alert("Logout Successfully");
     navigate("/login");
-    window.location.reload(); // State reset karne ke liye
+    window.location.reload();
   };
 
   return (
     <nav className='navbar'>
       <div className='nav-logo'>
-        <h1 onClick={() => navigate("/")}>Rental <span>Hub</span></h1>
+        <h1 onClick={() => { navigate("/"); setIsMobile(false); }}>
+          Rental <span>Hub</span>
+        </h1>
       </div>
 
       {/* Mobile Menu Icon */}
@@ -28,20 +33,31 @@ const Navbar = () => {
         {isMobile ? "✖" : "☰"}
       </div>
 
+      {/* Nav Links Section */}
       <ul className={isMobile ? 'nav-links-mobile' : 'nav-links'} onClick={() => setIsMobile(false)}>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/listings">Browse Homes</Link></li>
+        
+        {/* Owner Specific Links */}
         {isAuthenticated && role === "owner" && (
           <>
             <li><Link to="/add">List Property</Link></li>
             <li><Link to="/my-properties">My Properties</Link></li>
           </>
         )}
-        
-        {/* Mobile View mein Login/Logout niche dikhega */}
+
+        {/* Mobile View Profile/Auth Section (Sirf Mobile menu mein dikhega) */}
         <div className='mobile-auth-btns'>
           {isAuthenticated ? (
-            <button className='logout-btn' onClick={handleLogout}>Logout</button>
+            <div className="mobile-user-profile">
+               <img 
+                src={user.profilePic || "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"} 
+                alt="User" 
+                className="nav-profile-img" 
+              />
+              <span className="nav-username">Hi, {user.name?.split(' ')[0]}</span>
+              <button className='logout-btn' onClick={handleLogout}>Logout</button>
+            </div>
           ) : (
             <>
               <Link to="/login" className='nav-auth-link'>Login</Link>
@@ -51,10 +67,20 @@ const Navbar = () => {
         </div>
       </ul>
 
-      {/* Desktop Auth Buttons */}
+      {/* Desktop View Profile/Auth Section (Sirf Desktop par dikhega) */}
       <div className='nav-auth-desktop'>
         {isAuthenticated ? (
-          <button className='logout-btn' onClick={handleLogout}>Logout</button>
+          <div className="user-profile-flex">
+            <div>
+              <img 
+              src={user.profilePic || "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"} 
+              alt="User" 
+              className="nav-profile-img" 
+            />
+            </div>
+            <span className="nav-username">Hi, {user.name?.split(' ')[0]}</span>
+            <button className='logout-btn' onClick={handleLogout}>Logout</button>
+          </div>
         ) : (
           <div className='auth-flex'>
             <Link to="/login" className='nav-auth-link'>Login</Link>

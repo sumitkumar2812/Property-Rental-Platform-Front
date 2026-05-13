@@ -67,8 +67,8 @@ const Listings = () => {
           <option value="3">3 BHK</option>
         </select>
 
-        <p style={{ marginTop: '10px', color: '#666' }}>Showing {myProps.length} properties</p>
       </div>
+      <p style={{ marginTop: '10px', color: '#666' }}>Showing {myProps.length} properties</p>
 
       {loading ? <Loader /> : (<div className='listings-container'>
         {myProps.length > 0 ? (myProps.map((item) => (
