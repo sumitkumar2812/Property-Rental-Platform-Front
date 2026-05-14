@@ -71,6 +71,8 @@
   color: white;
   border: none;
   padding: 15px 40px;
+  width: 60%;
+  height: 50%;
   border-radius: 50px;
   font-weight: bold;
   cursor: pointer;
