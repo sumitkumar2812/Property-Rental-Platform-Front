@@ -16,7 +16,7 @@ const Signup = () => {
     e.preventDefault()
 
     try {
-      const response = await axios.post("http://localhost:5000/api/auth/signup", { name: name, email: email, mobile: mobile, password: password, role: role });
+      const response = await axios.post("https://property-rental-platform-backend.onrender.com/api/auth/signup", { name: name, email: email, mobile: mobile, password: password, role: role });
       alert("User Registered! Please Login")
       navigate("/login")
       console.log(response.data)

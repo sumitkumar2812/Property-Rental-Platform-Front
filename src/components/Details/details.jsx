@@ -29,7 +29,7 @@ const Details = () => {
     const fetchProperty = async () => {
       try {
 
-        const response = await axios.get(`http://localhost:5000/api/properties/${id}`)
+        const response = await axios.get(`https://property-rental-platform-backend.onrender.com/api/properties/${id}`)
         console.log(response.data);
         setProperty(response.data);
       } catch (error) {
@@ -46,7 +46,7 @@ const Details = () => {
     const isConfirmed = window.confirm("Are you sure you want to delete this proprty , this action can not be Undone.")
     if (isConfirmed) {
       try {
-        await axios.delete(`http://localhost:5000/api/properties/${id}`, {
+        await axios.delete(`https://property-rental-platform-backend.onrender.com/api/properties/${id}`, {
           headers: { Authorization: `Bearer ${token}` }
         })
         alert("Property Deleted Successfully.")

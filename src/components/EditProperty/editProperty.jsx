@@ -16,7 +16,7 @@ const EditProperty = () => {
     useEffect(() => {
     const fetchProperty = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/properties/${id}`);
+        const response = await axios.get(`https://property-rental-platform-backend.onrender.com/api/properties/${id}`);
         setFormData(response.data)
         console.log(response.data)
       } catch (error) {
@@ -46,7 +46,7 @@ const EditProperty = () => {
 
         try {
             setLoading(true)
-            await axios.put(`http://localhost:5000/api/properties/${id}`, formData, { headers: {Authorization :`Bearer ${token}`}})
+            await axios.put(`https://property-rental-platform-backend.onrender.com/api/properties/${id}`, formData, { headers: {Authorization :`Bearer ${token}`}})
 
             alert("Property Updated Successfully")
             navigate(`/property/${id}`)

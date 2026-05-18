@@ -27,7 +27,7 @@ const Listings = () => {
         setLoading(true)
         const { city, maxPrice, minPrice, bedrooms } = filters
         const token = localStorage.getItem("token");
-        const response = await axios.get("http://localhost:5000/api/properties/my-properties", { params: { city, maxPrice, minPrice, bedrooms }, headers: { Authorization: `Bearer ${token}` } });
+        const response = await axios.get("https://property-rental-platform-backend.onrender.com/api/properties/my-properties", { params: { city, maxPrice, minPrice, bedrooms }, headers: { Authorization: `Bearer ${token}` } });
         setMyProps(response.data)
         console.log(response.data)
       } catch (error) {

@@ -26,7 +26,7 @@ const Listings = () => {
       try {
         setLoading(true)
         const {city, maxPrice, minPrice, bedrooms} = filters
-        const response = await axios.get("http://localhost:5000/api/properties",{params:{city, maxPrice, minPrice, bedrooms}});
+        const response = await axios.get("https://property-rental-platform-backend.onrender.com/api/properties",{params:{city, maxPrice, minPrice, bedrooms}});
         setProperties(response.data)
         console.log(response.data)
       } catch (error) {

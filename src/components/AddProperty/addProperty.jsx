@@ -66,7 +66,7 @@ const AddProperty = () => {
                 data.append("image", imageFile)
             }
 
-            const response = await axios.post("http://localhost:5000/api/properties", data, {
+            const response = await axios.post("https://property-rental-platform-backend.onrender.com/api/properties", data, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     "Content-Type": "multipart/form-data"

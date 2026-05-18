@@ -13,7 +13,7 @@ const Login = () => {
       e.preventDefault()
 
       try {
-        const response = await axios.post("http://localhost:5000/api/auth/login",{email: email, password: password});
+        const response = await axios.post("https://property-rental-platform-backend.onrender.com/api/auth/login",{email: email, password: password});
 
         localStorage.setItem("token", response.data.token)
         localStorage.setItem("role", response.data.role)
