@@ -79,6 +79,8 @@ const AddProperty = () => {
         } catch (error) {
             console.error("Error posting property:", error);
             alert("Error: " + (error.response?.data?.message || "Something went wrong"));
+        } finally{
+            setLoading(false)
         }
     }
     if (loading) return <Loader />
