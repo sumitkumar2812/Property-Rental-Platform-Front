@@ -14,7 +14,7 @@ return (
 <div className='home-container'>
   <section className='hero'>
     <div className='hero-content'>
-      <h1>Find your perfect Rental Home</h1>
+      <h1>Welcome to Homely</h1>
       <p>The best properties in your favorite cities.</p>
       <button className='search-button' onClick={handleSearch}>Find Your Perfect Property</button>
     </div>

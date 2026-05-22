@@ -24,7 +24,7 @@ const Navbar = () => {
     <nav className='navbar'>
       <div className='nav-logo'>
         <h1 onClick={() => { navigate("/"); setIsMobile(false); }}>
-          Rental <span>Hub</span>
+          <span>Homely</span>
         </h1>
       </div>
 
