@@ -4,10 +4,22 @@ import "./addProperty.css"
 import { useNavigate } from 'react-router-dom'
 import Loader from '../Loader/loader'
 
+const All_Amenities = [
+    'WiFi',
+    'Air Conditioning',
+    'Parking',
+    'Power Backup',
+    'Gym',
+    'Swimming Pool',
+    'Security / CCTV',
+    'Furnished'
+]
+
 const AddProperty = () => {
     const navigate = useNavigate()
-    const [imagePreview, setImagePreview] = useState(null);
-    const [imageFile, setImageFile] = useState(null);
+    const [imagePreviews, setImagePreviews] = useState([]);
+    const [imageFiles, setImageFiles] = useState([]);
+    const [selectedAmenities, setSelectedAmenities] = useState([])
     const [loading, setLoading] = useState(true)
     const [formData, setFormData] = useState({
         title: "", location: "", price: "", description: "", bedrooms: "", bathrooms: ""
@@ -21,23 +33,41 @@ const AddProperty = () => {
     }, []);
 
     const handleImageChange = (e) => {
-        const file = e.target.files[0]
-        if (file) {
-            setImageFile(file)
+        const files = Array.from(e.target.files)
+        if (files.length > 0) {
 
-            const reader = new FileReader()
-            reader.onloadend = () => {
-                setImagePreview(reader.result)
-            }
-            reader.readAsDataURL(file)
+            const newPreviews = files.map(file => URL.createObjectURL(file));
+
+            setImageFiles(prevFiles => [...prevFiles, ...files])
+            setImagePreviews(prevPreview => [...prevPreview, ...newPreviews])
+
+            e.target.value = "";
+
+            //const reader = new FileReader()
+            // reader.onloadend = () => {
+            //     setImagePreview(reader.result)
+            // }
+            // reader.readAsDataURL(file)
         }
     }
 
     const handleRemoveImage = () => {
-        setImageFile(null);
-        setImagePreview(null);
+        setImageFiles([]);
+        setImagePreviews([]);
         document.getElementById("inputImage").value = "";
     }
+
+    const handleAmenitySelect = (e) => {
+        const value = e.target.value;
+        if (value && !selectedAmenities.includes(value)) {
+            setSelectedAmenities([...selectedAmenities, value])
+        }
+    }
+
+    const removeAmenity = (amenityToRemove) => {
+        setSelectedAmenities(selectedAmenities.filter(item => item !== amenityToRemove))
+    }
+    
 
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -57,19 +87,24 @@ const AddProperty = () => {
 
             data.append("title", formData.title);
             data.append("location", formData.location);
-            data.append("price", formData.price);
+            data.append("price", Number(formData.price));
             data.append("description", formData.description);
-            data.append("bedrooms", formData.bedrooms);
-            data.append("bathrooms", formData.bathrooms);
+            data.append("bedrooms", Number(formData.bedrooms));
+            data.append("bathrooms", Number(formData.bathrooms));
+            data.append("amenities", JSON.stringify(selectedAmenities))
 
-            if (imageFile) {
-                data.append("image", imageFile)
-            }
+            imageFiles.forEach((file) => {
+                data.append("images", file)
+            })
+
+            // if (imageFiles) {
+            //     data.append("image", imageFiles)
+            // }
 
             const response = await axios.post("https://property-rental-platform-backend.onrender.com/api/properties", data, {
                 headers: {
                     Authorization: `Bearer ${token}`,
-                    "Content-Type": "multipart/form-data"
+                    
                 }
             })
             if (response.status === 201) {
@@ -79,7 +114,7 @@ const AddProperty = () => {
         } catch (error) {
             console.error("Error posting property:", error);
             alert("Error: " + (error.response?.data?.message || "Something went wrong"));
-        } finally{
+        } finally {
             setLoading(false)
         }
     }
@@ -92,29 +127,67 @@ const AddProperty = () => {
                 <input type='text' name='title' placeholder='Property Title(e.g 2BHK Flat)' onChange={handleChange} required />
                 <input type='text' name='price' placeholder='Price' onChange={handleChange} required />
                 <input type='text' name='location' placeholder='Location' onChange={handleChange} required />
-                {imagePreview && (
+                {imagePreviews.length > 0 && (
                     <div className='preview-container'>
-                        <p>Image Preview:</p>
-                        <img src={imagePreview} alt="Selected" style={{ width: '200px', borderRadius: '10px', marginTop: '10px' }} />
+                        <p>Image Previews:</p>
+                        <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginTop: '10px' }}>
+                            {
+                                imagePreviews.map((src, index) => (
+                                    <img key ={index} src={src} alt={`Preview ${index}`} style={{ width: '200px', borderRadius: '10px', marginTop: '10px' }} />
+                                ))
+                            }
+                        </div>
+                        
                         <button
                             onClick={handleRemoveImage}
                             style={{
-                                marginLeft: "5px",
-                                marginBottom: "5px",
+                                margin: "8px",
                                 color: 'black',
                                 borderWidth: '2px',
                                 borderRadius: '10px',
                                 cursor: 'pointer',
-                                padding: '5px 10px'
+                                padding: '5px 15px'
                             }}
                         >
-                            X
+                            Remove All Images
                         </button>
                     </div>)}
-                <input type='file' id="inputImage" accept='image/*' placeholder='Image' onChange={handleImageChange} required />
+                <input type='file' id="inputImage" accept='image/*' placeholder='Image' multiple onChange={handleImageChange}/>
                 <textarea name='description' placeholder='Description' onChange={handleChange} required></textarea>
                 <input type='text' name='bedrooms' placeholder='No. of Bedrooms' onChange={handleChange} required />
                 <input type='text' name='bathrooms' placeholder='No. of Bathrooms' onChange={handleChange} required />
+
+                <div style={{ width: '100%', textAlign: 'left' }}>
+                    <label style={{ fontWeight: '500', display: 'block', marginBottom: '5px' }}>Select Amenities:</label>
+                    <select onChange={handleAmenitySelect} 
+                        defaultValue=""
+                        style={{ width: '100%', padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }}>
+                        <option value="" disabled>Choose Amenities</option>
+                        {All_Amenities.map((amenity) => (
+                            <option key={amenity} value={amenity}>{amenity}</option>
+                        ))}
+                    </select>
+
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '10px' }}>
+                        {selectedAmenities.map((item) => (
+                            <span key={item} style={{ background: '#e0f2fe', color: '#0369a1', padding: '5px 10px', borderRadius: '20px', fontSize: '14px', display: 'flex', alignItems: 'center', gap: '5px' }}>
+                                {item}
+                                <button 
+                                    type="button" 
+                                    onClick={() => removeAmenity(item)} 
+                                    style={{ background: 'none', border: 'none', color: '#ef4444', fontWeight: 'bold', cursor: 'pointer' }}
+                                >
+                                    &times;
+                                </button>
+                            </span>
+                        ))}
+                    </div>
+                </div>
+
+
+
+
+
                 <button type='submit' className='submit-btn'>Post Property</button>
             </form>
         </div>
