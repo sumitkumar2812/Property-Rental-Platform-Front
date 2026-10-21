@@ -25,8 +25,8 @@ const Listings = () => {
     const fetchProperties = async () => {
       try {
         setLoading(true)
-        const {city, maxPrice, minPrice, bedrooms} = filters
-        const response = await axios.get("https://property-rental-platform-backend.onrender.com/api/properties",{params:{city, maxPrice, minPrice, bedrooms}});
+        const { city, maxPrice, minPrice, bedrooms } = filters
+        const response = await axios.get("https://property-rental-platform-backend.onrender.com/api/properties", { params: { city, maxPrice, minPrice, bedrooms } });
         setProperties(response.data)
         console.log(response.data)
       } catch (error) {
@@ -35,7 +35,7 @@ const Listings = () => {
         setLoading(false)
       }
     }
-    const timer = setTimeout(() => fetchProperties(),500);
+    const timer = setTimeout(() => fetchProperties(), 500);
     return () => clearTimeout(timer)
   }, [filters])
 
@@ -55,7 +55,7 @@ const Listings = () => {
           width: '25%',
           borderRadius: '25px',
           border: '2px solid #007bff',
-          marginLeft:"15px",
+          marginLeft: "15px",
           outline: 'none'
         }} onChange={handleFilterChange} />
 
@@ -67,23 +67,48 @@ const Listings = () => {
         </select>
 
       </div>
-        <p style={{ marginTop: '10px', color: '#666' }}>Showing {properties.length} properties</p>
+      <p style={{ marginTop: '10px', color: '#666' }}>Showing {properties.length} properties</p>
 
-      {loading ? <Loader /> : (<div className='listings-container'>
-        {properties.length > 0 ? (properties.map((item) => (
-          <div className='property-card' key={item._id}>
-            <img src={item.image} alt={item.title} loading='lazy' />
-            <div className='card-details'>
-              <h3>{item.title}</h3>
-              <p className='loc'>{item.location}</p>
-              <p className='price'>₹{item.price} <span>/Month</span></p>
-              <Link to={`/property/${item._id}`}>
-                <button className='details-btn'>View Details</button>
-              </Link>
+      {loading ?
+        <Loader /> : (<div className='listings-container'>
+          {properties.length > 0 ? (properties.map((item) => {
+
+            const propertyImages = Array.isArray(item.images) && item.images.length > 0 ? item.images : (item.image ? Array.isArray(item.image) ? item.iamge : [item.image] : [])
+            let amenitiesList = []
+
+            if (Array.isArray(item.amenities)) {
+              amenitiesList = item.amenities
+            } else if (typeof item.amenities === "string") {
+              try {
+                amenitiesList = JSON.parse(item.amenities)
+              } catch (err) {
+                amenitiesList = item.amenities.split(",").map(i => i.trim())
+                console.log(err)
+              }
+            }
+            <div className='property-card' key={item._id}>
+              <img src={propertyImages[0] || "https://via.placeholder.com/300"} alt={item.title} loading='lazy' />
+              <div className='card-details'>
+                <h3>{item.title}</h3>
+                <p className='loc'>{item.location}</p>
+                <p className='price'>₹{item.price} <span>/Month</span></p>
+                {/* AMENITIES BADGES DISPLAY */}
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px', margin: '8px 0' }}>
+                  {amenitiesList.map((amenity, idx) => (
+                    <span key={idx} style={{ background: '#f1f5f9', color: '#475569', fontSize: '11px', padding: '2px 8px', borderRadius: '4px' }}>
+                      {amenity}
+                    </span>
+                  ))}
+                </div>
+                <Link to={`/property/${item._id}`}>
+                  <button className='details-btn'>View Details</button>
+                </Link>
+              </div>
             </div>
-          </div>))
-        ) : (<div>There is no properties in this Location</div>)}
-      </div>)}
+
+          })
+          ) : (<div>There is no properties in this Location</div>)}
+        </div>)}
     </div>
   )
 }
