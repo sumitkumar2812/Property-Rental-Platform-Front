@@ -73,7 +73,7 @@ const Listings = () => {
         <Loader /> : (<div className='listings-container'>
           {properties.length > 0 ? (properties.map((item) => {
 
-            const propertyImages = Array.isArray(item.images) && item.images.length > 0 ? item.images : (item.image ? Array.isArray(item.image) ? item.iamge : [item.image] : [])
+            const propertyImages = Array.isArray(item.images) && item.images.length > 0 ? item.images : (item.image ? Array.isArray(item.image) ? item.image : [item.image] : [])
             let amenitiesList = []
 
             if (Array.isArray(item.amenities)) {
@@ -86,7 +86,8 @@ const Listings = () => {
                 console.log(err)
               }
             }
-            <div className='property-card' key={item._id}>
+            return (
+              <div className='property-card' key={item._id}>
               <img src={propertyImages[0] || "https://via.placeholder.com/300"} alt={item.title} loading='lazy' />
               <div className='card-details'>
                 <h3>{item.title}</h3>
@@ -105,6 +106,7 @@ const Listings = () => {
                 </Link>
               </div>
             </div>
+            )
 
           })
           ) : (<div>There is no properties in this Location</div>)}
