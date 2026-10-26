@@ -70,21 +70,48 @@ const Listings = () => {
       </div>
       <p style={{ marginTop: '10px', color: '#666' }}>Showing {myProps.length} properties</p>
 
-      {loading ? <Loader /> : (<div className='listings-container'>
-        {myProps.length > 0 ? (myProps.map((item) => (
-          <div className='property-card' key={item._id}>
-            <img src={item.image} alt={item.title} loading='lazy' />
-            <div className='card-details'>
-              <h3>{item.title}</h3>
-              <p className='loc'>{item.location}</p>
-              <p className='price'>₹{item.price} <span>/Month</span></p>
-              <Link to={`/property/${item._id}`}>
-                <button className='details-btn'>View Details</button>
-              </Link>
-            </div>
-          </div>))
-        ) : (<div>There is no properties</div>)}
-      </div>)}
+     {loading ?
+             <Loader /> : (<div className='listings-container'>
+               {myProps.length > 0 ? (myProps.map((item) => {
+     
+                 const propertyImages = Array.isArray(item.images) && item.images.length > 0 ? item.images : (item.image ? Array.isArray(item.image) ? item.image : [item.image] : [])
+                 let amenitiesList = []
+     
+                 if (Array.isArray(item.amenities)) {
+                   amenitiesList = item.amenities
+                 } else if (typeof item.amenities === "string") {
+                   try {
+                     amenitiesList = JSON.parse(item.amenities)
+                   } catch (err) {
+                     amenitiesList = item.amenities.split(",").map(i => i.trim())
+                     console.log(err)
+                   }
+                 }
+                 return (
+                   <div className='property-card' key={item._id}>
+                   <img src={propertyImages[0] || "https://via.placeholder.com/300"} alt={item.title} loading='lazy' />
+                   <div className='card-details'>
+                     <h3>{item.title}</h3>
+                     <p className='loc'>{item.location}</p>
+                     <p className='price'>₹{item.price} <span>/Month</span></p>
+                     {/* AMENITIES BADGES DISPLAY */}
+                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px', margin: '8px 0' }}>
+                       {amenitiesList.map((amenity, idx) => (
+                         <span key={idx} style={{ background: '#f1f5f9', color: '#475569', fontSize: '11px', padding: '2px 8px', borderRadius: '4px' }}>
+                           {amenity}
+                         </span>
+                       ))}
+                     </div>
+                     <Link to={`/property/${item._id}`}>
+                       <button className='details-btn'>View Details</button>
+                     </Link>
+                   </div>
+                 </div>
+                 )
+     
+               })
+               ) : (<div>There is no properties</div>)}
+             </div>)}
     </div>
   )
 }

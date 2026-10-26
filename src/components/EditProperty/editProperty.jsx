@@ -10,17 +10,17 @@ const EditProperty = () => {
     const [loading, setLoading] = useState(true)
 
     const [formData, setFormData] = useState({
-        title: "", 
-        location: "", 
-        price: "", 
-        description: "", 
-        bedrooms: "", 
+        title: "",
+        location: "",
+        price: "",
+        description: "",
+        bedrooms: "",
         bathrooms: ""
     })
 
     // State for managing existing images (URLs from DB)
     const [existingImages, setExistingImages] = useState([])
-    
+
     // State for managing newly selected files from device
     const [newImageFiles, setNewImageFiles] = useState([])
 
@@ -65,7 +65,7 @@ const EditProperty = () => {
         }
         fetchProperty()
     }, [id])
-    
+
     const handleChange = (e) => {
         const { name, value } = e.target
         setFormData({
@@ -132,16 +132,16 @@ const EditProperty = () => {
                 data.append("amenities", amenity);
             });
 
-            await axios.put(`https://property-rental-platform-backend.onrender.com/api/properties/${id}`, data, { 
-                headers: { 
+            await axios.put(`https://property-rental-platform-backend.onrender.com/api/properties/${id}`, data, {
+                headers: {
                     Authorization: `Bearer ${token}`,
-                    "Content-Type": "multipart/form-data" 
-                } 
+                    "Content-Type": "multipart/form-data"
+                }
             })
 
             alert("Property Updated Successfully")
             navigate(`/property/${id}`)
-            
+
         } catch (error) {
             console.error("Error Updating property:", error);
             alert("Error: " + (error.response?.data?.message || "Something went wrong"));
@@ -159,7 +159,7 @@ const EditProperty = () => {
                 <input type='text' name='title' value={formData.title} placeholder='Property Title' onChange={handleChange} required />
                 <input type='number' name='price' value={formData.price} placeholder='Price' onChange={handleChange} required />
                 <input type='text' name='location' value={formData.location} placeholder='Location' onChange={handleChange} required />
-                
+
                 {/* 1. EXISTING IMAGES PREVIEW & REMOVE SECTION */}
                 <div style={{ margin: '10px 0', border: '1px solid #ddd', padding: '15px', borderRadius: '8px' }}>
                     <label style={{ fontWeight: '600', display: 'block', marginBottom: '8px' }}>Current Images:</label>
@@ -170,9 +170,9 @@ const EditProperty = () => {
                             {existingImages.map((imgUrl, idx) => (
                                 <div key={idx} style={{ position: 'relative', width: '80px', height: '80px' }}>
                                     <img src={imgUrl} alt="property" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '6px', border: '1px solid #ccc' }} />
-                                    <button 
-                                        type='button' 
-                                        onClick={() => handleRemoveExistingImage(idx)} 
+                                    <button
+                                        type='button'
+                                        onClick={() => handleRemoveExistingImage(idx)}
                                         style={{ position: 'absolute', top: '-5px', right: '-5px', background: '#ef4444', color: '#fff', border: 'none', borderRadius: '50%', width: '20px', height: '20px', fontSize: '12px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                                     >
                                         &times;
@@ -186,22 +186,22 @@ const EditProperty = () => {
                 {/* 2. UPLOAD NEW FILES FROM DEVICE SECTION */}
                 <div style={{ margin: '10px 0', border: '1px solid #ddd', padding: '15px', borderRadius: '8px' }}>
                     <label style={{ fontWeight: '600', display: 'block', marginBottom: '8px' }}>Add New Images from Device:</label>
-                    <input 
-                        type='file' 
-                        multiple 
-                        accept='image/*' 
-                        onChange={handleFileChange} 
+                    <input
+                        type='file'
+                        multiple
+                        accept='image/*'
+                        onChange={handleFileChange}
                         style={{ marginBottom: '10px' }}
                     />
-                    
+
                     {newImageFiles.length > 0 && (
                         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginTop: '8px' }}>
                             {newImageFiles.map((file, idx) => (
                                 <div key={idx} style={{ position: 'relative', background: '#f1f5f9', padding: '5px 10px', borderRadius: '4px', fontSize: '12px', display: 'flex', alignItems: 'center', gap: '5px' }}>
                                     <span>{file.name}</span>
-                                    <button 
-                                        type='button' 
-                                        onClick={() => handleRemoveNewFile(idx)} 
+                                    <button
+                                        type='button'
+                                        onClick={() => handleRemoveNewFile(idx)}
                                         style={{ background: 'transparent', border: 'none', color: '#ef4444', fontWeight: 'bold', cursor: 'pointer', fontSize: '14px' }}
                                     >
                                         &times;
@@ -213,19 +213,19 @@ const EditProperty = () => {
                 </div>
 
                 <textarea name='description' value={formData.description} placeholder='Description' onChange={handleChange} required></textarea>
-                
+
                 <input type='number' name='bedrooms' value={formData.bedrooms} placeholder='No. of Bedrooms' onChange={handleChange} required />
                 <input type='number' name='bathrooms' value={formData.bathrooms} placeholder='No. of Bathrooms' onChange={handleChange} required />
-                
+
                 {/* 3. AMENITIES MANAGEMENT SECTION */}
                 <div style={{ margin: '10px 0', border: '1px solid #ddd', padding: '15px', borderRadius: '8px' }}>
                     <label style={{ fontWeight: '600', display: 'block', marginBottom: '8px' }}>Manage Amenities:</label>
                     <div style={{ display: 'flex', gap: '8px', marginBottom: '10px' }}>
-                        <input 
-                            type='text' 
-                            value={newAmenityInput} 
-                            placeholder='Add amenity (e.g. WiFi)' 
-                            onChange={(e) => setNewAmenityInput(e.target.value)} 
+                        <input
+                            type='text'
+                            value={newAmenityInput}
+                            placeholder='Add amenity (e.g. WiFi)'
+                            onChange={(e) => setNewAmenityInput(e.target.value)}
                             style={{ flex: 1, padding: '8px' }}
                         />
                         <button type='button' onClick={handleAddAmenity} style={{ padding: '8px 15px', background: '#007bff', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Add</button>
