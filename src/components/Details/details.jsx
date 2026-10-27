@@ -76,6 +76,7 @@ const Details = () => {
       amenitiesList = JSON.parse(property.amenities);
     } catch (err) {
       amenitiesList = property.amenities.split(",").map(i => i.trim());
+      console.log(err);
     }
   }
 

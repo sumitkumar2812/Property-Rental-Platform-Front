@@ -65,6 +65,9 @@ const Listings = () => {
           <option value="1">1 BHK</option>
           <option value="2">2 BHK</option>
           <option value="3">3 BHK</option>
+          <option value="3">4 BHK</option>
+          <option value="3">5 BHK</option>
+          <option value="3">6 BHK</option>
         </select>
 
       </div>
