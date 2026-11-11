@@ -117,10 +117,13 @@ const EditProperty = () => {
             data.append("bedrooms", formData.bedrooms);
             data.append("bathrooms", formData.bathrooms);
 
+            data.append("existingImages", JSON.stringify(existingImages));
+            data.append("amenities", JSON.stringify(amenitiesList));
+
             // Append existing images so backend knows which ones to keep
-            existingImages.forEach((imgUrl) => {
-                data.append("existingImages", imgUrl);
-            });
+            // existingImages.forEach((imgUrl) => {
+            //     data.append("existingImages", imgUrl);
+            // });
 
             // Append newly uploaded local image files
             newImageFiles.forEach((file) => {
@@ -128,9 +131,9 @@ const EditProperty = () => {
             });
 
             // Append amenities array elements
-            amenitiesList.forEach((amenity) => {
-                data.append("amenities", amenity);
-            });
+            // amenitiesList.forEach((amenity) => {
+            //     data.append("amenities", amenity);
+            // });
 
             await axios.put(`https://property-rental-platform-backend.onrender.com/api/properties/${id}`, data, {
                 headers: {
