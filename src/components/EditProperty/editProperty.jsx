@@ -105,6 +105,12 @@ const EditProperty = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         const token = localStorage.getItem("token");
+
+        const price =  Number(formData.price)
+        if (!Number.isFinite(price) || price <= 0) {
+            alert("Please enter a valid property price.")
+            return
+        }
         setLoading(true)
 
         try {
@@ -112,7 +118,7 @@ const EditProperty = () => {
             const data = new FormData();
             data.append("title", formData.title);
             data.append("location", formData.location);
-            data.append("price", formData.price);
+            data.append("price", price);
             data.append("description", formData.description);
             data.append("bedrooms", formData.bedrooms);
             data.append("bathrooms", formData.bathrooms);
@@ -160,7 +166,7 @@ const EditProperty = () => {
             <h2>Edit Your Property</h2>
             <form onSubmit={handleSubmit} className='property-form'>
                 <input type='text' name='title' value={formData.title} placeholder='Property Title' onChange={handleChange} required />
-                <input type='number' name='price' value={formData.price} placeholder='Price' onChange={handleChange} required />
+                <input type='number' name='price' value={formData.price} placeholder='Price' onChange={handleChange} min="1" required />
                 <input type='text' name='location' value={formData.location} placeholder='Location' onChange={handleChange} required />
 
                 {/* 1. EXISTING IMAGES PREVIEW & REMOVE SECTION */}
