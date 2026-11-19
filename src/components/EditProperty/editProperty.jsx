@@ -143,8 +143,7 @@ const EditProperty = () => {
 
             await axios.put(`https://property-rental-platform-backend.onrender.com/api/properties/${id}`, data, {
                 headers: {
-                    Authorization: `Bearer ${token}`,
-                    "Content-Type": "multipart/form-data"
+                    Authorization: `Bearer ${token}`
                 }
             })
 
